@@ -6,3 +6,6 @@
 	path = lib/openzeppelin-contracts
 	url = https://github.com/openzeppelin/openzeppelin-contracts
 	branch = v4.8.0
+[submodule "lib/metatx-standard"]
+	path = lib/metatx-standard
+	url = https://github.com/bcnmy/metatx-standard
