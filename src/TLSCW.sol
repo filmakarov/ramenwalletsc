@@ -62,20 +62,6 @@ contract TimelockSCW is EIP712MetaTransaction {
         emit DepositCreated(tokenAddress, amount, unlock_timestamp);
     }
 
-    function depositERC20(address tokenAddress, uint256 amount, uint256 unlock_timestamp) public {
-        require (amount > 0, "TLSCW: Can not deposit 0 ERC20 tokens");
-        IERC20 token = IERC20(tokenAddress);
-        token.safeTransferFrom(msgSender(), address(this), amount);
-        Deposit memory dep = Deposit({
-            tokenAddress: tokenAddress,
-            amount: amount,
-            unlock_timestamp: unlock_timestamp,
-            claimed: false
-        });
-        Deposits[++lastDepositId] = dep;
-        emit DepositCreated(tokenAddress, amount, unlock_timestamp);
-    }
-
     function depositNative(uint256 unlock_timestamp) public payable {
         uint256 nativeTokenReceived = msg.value;
         require (nativeTokenReceived > 0, "TLSCW: Can not deposit 0 Native tokens");
