@@ -7,7 +7,7 @@ forge install bcnmy/metatx-standard
 
 # Local deploy
 
-forge script DeployIF --fork-url http://localhost:8545 --broadcast
+forge script DeployFaС --fork-url http://localhost:8545 --broadcast
 
 forge script DeployDCImpl --rpc-url mumbai --broadcast --sender 0x797158fd06f1a8ec6ab09c78ae2dd3d2c13762c8 --private-key $PRIVATE_KEY_POLYGON --verify
 forge script DeployDCProxy --rpc-url mumbai --broadcast --sender 0x797158fd06f1a8ec6ab09c78ae2dd3d2c13762c8 --private-key $PRIVATE_KEY_POLYGON --verify

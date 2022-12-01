@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-only
-pragma solidity ^0.8.12;
+pragma solidity ^0.8.17;
 
 import "@std/console.sol";
 import "@std/Script.sol";
@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 
 import "../src/TLSCW.sol";
 
-contract DeployIF is Script {
+contract DeployFaC is Script {
 
     using Strings for uint256;
 

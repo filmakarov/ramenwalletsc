@@ -7,6 +7,8 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/proxy/Clones.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 
+import "@std/console.sol";
+
 /**
 *   Timelock Smart contract core implementation. 
 *   Not upgradeable for the quick prototyping purposes.
@@ -42,7 +44,7 @@ contract TimelockSCW is EIP712MetaTransaction {
     address private immutable __self = address(this);
 
     // struct : token, amount, unlock_timestamp, claimed
-     struct Deposit {
+    struct Deposit {
         address tokenAddress; // 0x00...00 means Native token
         uint256 amount;
         uint256 unlock_timestamp;
@@ -135,7 +137,7 @@ contract TimelockSCW is EIP712MetaTransaction {
     function claimDeposit(uint256 depositId) public onlyOwner {
         Deposit memory dep = deposits[depositId];
         require(!dep.claimed, "TLSCW: Deposit already claimed");
-        require(dep.unlock_timestamp >= block.timestamp, "TLSCW: Deposit not available yet");
+        require(dep.unlock_timestamp <= block.timestamp, "TLSCW: Deposit not available yet");
         dep.claimed = true;
         deposits[depositId] = dep;
         if (dep.tokenAddress == address(0)) {
@@ -157,6 +159,7 @@ contract TimelockSCW is EIP712MetaTransaction {
      * @dev Throws if called by any account other than the owner.
      */
     modifier onlyOwner() {
+        console.log("msgSender ", msgSender(), " Owner ", owner());
         require(owner() == msgSender(), "Ownable: caller is not the owner");
         _;
     }
