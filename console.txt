@@ -1,0 +1,16 @@
+
+# Installs
+
+forge install openzeppelin/openzeppelin-contracts
+forge install bcnmy/metatx-standard
+
+
+# Local deploy
+
+forge script DeployIF --fork-url http://localhost:8545 --broadcast
+
+forge script DeployDCImpl --rpc-url mumbai --broadcast --sender 0x797158fd06f1a8ec6ab09c78ae2dd3d2c13762c8 --private-key $PRIVATE_KEY_POLYGON --verify
+forge script DeployDCProxy --rpc-url mumbai --broadcast --sender 0x797158fd06f1a8ec6ab09c78ae2dd3d2c13762c8 --private-key $PRIVATE_KEY_POLYGON --verify
+
+
+Proxy at: 0xbee6B7D1c6144FA93eE661639dCE41a165fEd484, Implementation at: 0x7c413f0F56DA4E2849670417687ceF1286998111
