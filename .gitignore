@@ -12,3 +12,7 @@ out/
 
 # Node
 /node_modules
+
+#
+console.txt
+.DS_Store
