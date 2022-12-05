@@ -37,7 +37,7 @@ contract DeployFaC is Script {
 
         console.log("Factory at %s owner is %s", address(WalletFactory), WalletFactory.owner());
         console.log("Wallet %i at %s owner is %s", (WalletFactory.lastWalletId()), newWalletAddress, TimelockSCW(newWalletAddress).owner());
-        console.logBytes32(TimelockSCW(newWalletAddress).exposedDomSep());
+        //console.logBytes32(TimelockSCW(newWalletAddress).exposedDomSep());
 
 
         // SECOND WALLET //
@@ -58,7 +58,7 @@ contract DeployFaC is Script {
         WalletFactory.cloneDeterministic(salt, initdata);
 
         console.log("Wallet %i at %s owner is %s", (WalletFactory.lastWalletId()), newWalletAddress, TimelockSCW(newWalletAddress).owner());
-        console.logBytes32(TimelockSCW(newWalletAddress).exposedDomSep());
+        //console.logBytes32(TimelockSCW(newWalletAddress).exposedDomSep());
         
         vm.stopBroadcast();
 

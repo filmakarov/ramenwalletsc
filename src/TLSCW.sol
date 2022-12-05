@@ -7,8 +7,6 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/proxy/Clones.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 
-import "@std/console.sol";
-
 /**
 *   Timelock Smart contract core implementation. 
 *   Not upgradeable for the quick prototyping purposes.
@@ -61,12 +59,6 @@ contract TimelockSCW is EIP712MetaTransaction {
 
     constructor() {
         _disableInitializers();
-    }
-
-    // !!!!!!!!!!!
-    // TESTING PURPOSES 
-    function exposedDomSep() public view returns(bytes32) {
-        return domainSeparator;
     }
 
     /**
@@ -159,7 +151,6 @@ contract TimelockSCW is EIP712MetaTransaction {
      * @dev Throws if called by any account other than the owner.
      */
     modifier onlyOwner() {
-        console.log("msgSender ", msgSender(), " Owner ", owner());
         require(owner() == msgSender(), "Ownable: caller is not the owner");
         _;
     }

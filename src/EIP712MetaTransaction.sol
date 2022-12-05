@@ -9,6 +9,9 @@ contract EIP712MetaTransaction is EIP712Base {
     event MetaTransactionExecuted(address userAddress, address relayerAddress, bytes functionSignature);
     mapping(address => uint256) private nonces;
 
+    string public eip712_name;
+    string public eip712_version;
+
     /*
      * Meta transaction structure.
      * No point of including value field here as if user is doing value transfer then he has the funds to pay for gas
@@ -24,6 +27,8 @@ contract EIP712MetaTransaction is EIP712Base {
 
     function __EIP712MetaTx_init(string memory name, string memory version) internal onlyInitializing {
         __EIP712_init_unchained(name, version);
+        eip712_name = name;
+        eip712_version = version;
     }
 
     function __EIP712MetaTx_init_unchained(string memory name, string memory version) internal onlyInitializing {
@@ -75,6 +80,20 @@ contract EIP712MetaTransaction is EIP712Base {
         address signer = ecrecover(toTypedMessageHash(hashMetaTransaction(metaTx)), sigV, sigR, sigS);
         require(signer != address(0), "Invalid signature");
         return signer == user;
+    }
+
+    // DEBUGGING PURPOSES
+    function checkMetaTransaction(address userAddress,
+        bytes memory functionSignature, bytes32 sigR, bytes32 sigS, uint8 sigV) public view returns(address) {
+        bytes4 destinationFunctionSig = convertBytesToBytes4(functionSignature);
+        require(destinationFunctionSig != msg.sig, "functionSignature can not be of executeMetaTransaction method");
+        MetaTransaction memory metaTx = MetaTransaction({
+            nonce: nonces[userAddress],
+            from: userAddress,
+            functionSignature: functionSignature
+        });
+        address signer = ecrecover(toTypedMessageHash(hashMetaTransaction(metaTx)), sigV, sigR, sigS);
+        return signer;
     }
 
     function msgSender() internal view returns(address sender) {

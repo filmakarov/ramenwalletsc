@@ -9,8 +9,23 @@ forge install bcnmy/metatx-standard
 
 forge script DeployFaС --fork-url http://localhost:8545 --broadcast
 
+forge script DeployFactory --rpc-url goerli --broadcast --verify
+
 forge script DeployDCImpl --rpc-url mumbai --broadcast --sender 0x797158fd06f1a8ec6ab09c78ae2dd3d2c13762c8 --private-key $PRIVATE_KEY_POLYGON --verify
 forge script DeployDCProxy --rpc-url mumbai --broadcast --sender 0x797158fd06f1a8ec6ab09c78ae2dd3d2c13762c8 --private-key $PRIVATE_KEY_POLYGON --verify
 
 
 Proxy at: 0xbee6B7D1c6144FA93eE661639dCE41a165fEd484, Implementation at: 0x7c413f0F56DA4E2849670417687ceF1286998111
+
+
+// Factory at 
+0xd8966213202B5A09E59Ff2D93e37dfA9850bB518
+
+//Factory2 at
+0xd605EeB7270f2cFbF03fc676eE9c87Bdb378eED1
+
+//Factory 3
+0x89Ed14A11e1d4d1b03F00E2ec664A1f7c54A9335
+
+// factory 4
+0x7c413f0F56DA4E2849670417687ceF1286998111
